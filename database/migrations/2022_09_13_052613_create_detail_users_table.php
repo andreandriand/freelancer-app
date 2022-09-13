@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('detail_users', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->nullable();
+            // $table->integer('user_id')->nullable();
+            $table->foreignId('user_id')->nullable()->index('fk_detail_users_to_users');
             $table->longText('photo')->nullable();
             $table->string('role')->nullable();
             $table->string('contact')->nullable();
