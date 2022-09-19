@@ -15,13 +15,17 @@ return new class extends Migration
     {
         Schema::create('order', function (Blueprint $table) {
             $table->id();
-            $table->integer('service_id')->nullable();
-            $table->integer('freelancer_id')->nullable();
-            $table->integer('buyer_id')->nullable();
+            // $table->integer('service_id')->nullable();
+            // $table->integer('freelancer_id')->nullable();
+            // $table->integer('buyer_id')->nullable();
+            $table->foreignId('service_id')->nullable()->index('fk_order_to_service');
+            $table->foreignId('freelancer_id')->nullable()->index('fk_order_freelancer_to_users');
+            $table->foreignId('buyer_id')->nullable()->index('fk_order_buyer_to_users');
             $table->longText('file')->nullable();
             $table->longText('note')->nullable();
             $table->date('expired')->nullable();
-            $table->integer('order_status_id')->nullable();
+            // $table->integer('order_status_id')->nullable();
+            $table->foreignId('order_status_id')->nullable()->index('fk_order_to_order_status');
             $table->softDeletes();
             $table->timestamps();
         });
