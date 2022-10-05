@@ -27,4 +27,11 @@ class ExperienceUser extends Model
         'updated_at',
         'deleted_at'
     ];
+
+    // one to many
+
+    public function detail_user()
+    {
+        return $this->belongsTo('App\Models\DetailUser', 'user_detail_id', 'id');
+    }
 }
