@@ -46,7 +46,7 @@ Route::group(
         Route::resource('order', MyOrderController::class);
 
         // profile
-        Route::get('delete_photo', ProfileController::class, 'delete')->name('delete.photo.profile');
+        Route::get('delete_photo', [ProfileController::class, 'delete'])->name('delete.photo.profile');
         Route::resource('profile', ProfileController::class);
     }
 );
