@@ -3,16 +3,16 @@
 
 <head>
 
-    @include('components.dashboard.meta')
+    @include('includes.dashboard.meta')
     <title>@yield('title') | Serv</title>
 
     @stack('before-style')
-    @include('components.dashboard.style')
+    @include('includes.dashboard.style')
     @stack('after-style')
 </head>
 
 <body class="antialiased">
-    <div class="flex h-screen bg-serv-service-bg" :class="{ 'overflow-hidden': isSideMenuOpen }">
+    <div class="flex h-screen bg-serv-services-bg" :class="{ 'overflow-hidden': isSideMenuOpen }">
 
         @include('components.dashboard.desktop')
 
@@ -26,13 +26,13 @@
         <div class="flex flex-col flex-1 w-full">
             @include('components.dashboard.header')
 
-            @include('sweetalert::alert')
+            {{-- @include('sweetalert::alert') --}}
 
             @yield('content')
         </div>
 
         @stack('before-script')
-        @include('components.dashboard.script')
+        @include('includes.dashboard.script')
         @stack('after-script')
 </body>
 
