@@ -21,9 +21,9 @@
             <li class="relative px-6 py-3">
 
                 @if (request()->is('member/dashboard') ||
-                    request()->is('member/*/dashboard') ||
-                    request()->is('member/dashboard/*') ||
-                    request()->is('member/*/dashboard/*'))
+                        request()->is('member/*/dashboard') ||
+                        request()->is('member/dashboard/*') ||
+                        request()->is('member/*/dashboard/*'))
                     <span class="absolute inset-y-0 left-0 w-1 rounded-tr-lg rounded-br-lg bg-serv-bg"
                         aria-hidden="true"></span>
                     <a class="inline-flex items-center w-full text-sm font-medium text-gray-800 transition-colors duration-150 hover:text-gray-800 "
@@ -56,9 +56,9 @@
             <li class="relative px-6 py-3">
 
                 @if (request()->is('member/service') ||
-                    request()->is('member/*/service') ||
-                    request()->is('member/service/*') ||
-                    request()->is('member/*/service/*'))
+                        request()->is('member/*/service') ||
+                        request()->is('member/service/*') ||
+                        request()->is('member/*/service/*'))
                     <span class="absolute inset-y-0 left-0 w-1 rounded-tr-lg rounded-br-lg bg-serv-bg"
                         aria-hidden="true"></span>
                     <a class="inline-flex items-center w-full text-sm font-medium text-gray-800 transition-colors duration-150 hover:text-gray-800"
@@ -118,9 +118,9 @@
             <li class="relative px-6 py-3">
 
                 @if (request()->is('member/request') ||
-                    request()->is('member/*/request') ||
-                    request()->is('member/request/*') ||
-                    request()->is('member/*/request/*'))
+                        request()->is('member/*/request') ||
+                        request()->is('member/request/*') ||
+                        request()->is('member/*/request/*'))
                     <span class="absolute inset-y-0 left-0 w-1 rounded-tr-lg rounded-br-lg bg-serv-bg"
                         aria-hidden="true"></span>
 
@@ -175,9 +175,9 @@
             <li class="relative px-6 py-3">
 
                 @if (request()->is('member/order') ||
-                    request()->is('member/*/order') ||
-                    request()->is('member/order/*') ||
-                    request()->is('member/*/order/*'))
+                        request()->is('member/*/order') ||
+                        request()->is('member/order/*') ||
+                        request()->is('member/*/order/*'))
                     <span class="absolute inset-y-0 left-0 w-1 rounded-tr-lg rounded-br-lg bg-serv-bg"
                         aria-hidden="true"></span>
 
@@ -238,9 +238,9 @@
             <li class="relative px-6 py-3">
 
                 @if (request()->is('member/profile') ||
-                    request()->is('member/*/profile') ||
-                    request()->is('member/profile/*') ||
-                    request()->is('member/*/profile/*'))
+                        request()->is('member/*/profile') ||
+                        request()->is('member/profile/*') ||
+                        request()->is('member/*/profile/*'))
                     <span class="absolute inset-y-0 left-0 w-1 rounded-tr-lg rounded-br-lg bg-serv-bg"
                         aria-hidden="true"></span>
                     <a class="inline-flex items-center w-full text-sm font-medium text-gray-800 transition-colors duration-150 hover:text-gray-800"
@@ -301,7 +301,8 @@
                     </svg>
                     <span class="ml-4">Logout</span>
 
-                    <form action="route('logout')" method="post" id="logout-form" style="display:none;">@csrf
+                    <form action="{{ route('logout') }}" method="post" id="logout-form" style="display:none;">
+                        @csrf
                     </form>
 
                 </a>

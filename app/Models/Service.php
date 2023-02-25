@@ -11,7 +11,7 @@ class Service extends Model
     // use HasFactory;
     use SoftDeletes;
 
-    public $table = 'services';
+    public $table = 'service';
 
     protected $dates = [
         'created_at',
