@@ -1,13 +1,18 @@
 <!-- Desktop sidebar -->
 <aside class="z-20 flex-shrink-0 hidden w-64 overflow-y-auto bg-white md:block" aria-label="aside">
     <div class="text-serv-bg">
-        <div class="" href="#">
-            <img src="{{ asset('/asset/images/logo.svg') }}" alt="" class="object-center mx-auto my-8 ">
-        </div>
+        <a class="" href="/">
+            <img src="{{ asset('/assets/images/logo.svg') }}" alt="" class="object-center mx-auto my-8 ">
+        </a>
         <div class="flex items-center pt-8 pl-5 space-x-2 border-t border-gray-100">
             <!--Author's profile photo-->
-            <img class="object-cover object-center mr-1 rounded-full w-14 h-14"
-                src="{{ url(Storage::url(auth()->user()->detail_user()->first()->photo)) }}" alt="Profile Photo" />
+            @if (auth()->user()->detail_user()->first()->photo != null)
+                <img class="inline w-12 h-12 mr-3 rounded-full"
+                    src="{{ url(Storage::url(auth()->user()->detail_user()->first()->photo)) }}" alt="Profile Photo">
+            @else
+                <img class="inline w-12 h-12 mr-3 rounded-full" src="{{ asset('assets/images/pp.svg') }}"
+                    alt="Profile Photo">
+            @endif
             <div>
                 <!--Author name-->
                 <p class="font-semibold text-gray-900 text-md">{{ Auth::user()->name }}</p>

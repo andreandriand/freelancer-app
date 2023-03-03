@@ -56,9 +56,14 @@
                     <button @click="open = !open"
                         class="flex flex-row items-center w-full px-4 py-2 mt-2 text-left bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:focus:bg-gray-600 dark-mode:hover:bg-gray-600 md:w-auto md:inline md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
                         Halo, {{ Auth::user()->name }}
-                        <img class="inline ml-3 h-12 w-12 rounded-full"
-                            src="{{ url(Storage::url(auth()->user()->detail_user()->first()->photo)) }}"
-                            alt="Profile Photo">
+                        @if (auth()->user()->detail_user()->first()->photo != null)
+                            <img class="inline w-12 h-12 mr-3 rounded-full"
+                                src="{{ url(Storage::url(auth()->user()->detail_user()->first()->photo)) }}"
+                                alt="Profile Photo">
+                        @else
+                            <img class="inline w-12 h-12 mr-3 rounded-full" src="{{ asset('assets/images/pp.svg') }}"
+                                alt="Profile Photo">
+                        @endif
                         <svg fill="currentColor" viewBox="0 0 20 20" :class="{ 'rotate-180': open, 'rotate-0': !open }"
                             class="inline w-4 h-4 mt-1 ml-1 transition-transform duration-200 transform md:-mt-1">
                             <path fill-rule="evenodd"

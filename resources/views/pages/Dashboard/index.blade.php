@@ -19,9 +19,14 @@
                     <div @click.away="open = false" class="relative z-10 hidden mt-5 lg:block" x-data="{ open: false }">
                         <button
                             class="flex flex-row items-center w-full px-4 py-2 mt-2 text-left bg-white rounded-lg dark-mode:bg-transparent dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:focus:bg-gray-600 dark-mode:hover:bg-gray-600 md:w-auto md:inline md:mt-0 md:ml-4">
-                            <img class="inline w-12 h-12 mr-3 rounded-full"
-                                src="{{ url(Storage::url(auth()->user()->detail_user()->first()->photo)) }}"
-                                alt="Profile Photo">
+                            @if (auth()->user()->detail_user()->first()->photo != null)
+                                <img class="inline w-12 h-12 mr-3 rounded-full"
+                                    src="{{ url(Storage::url(auth()->user()->detail_user()->first()->photo)) }}"
+                                    alt="Profile Photo">
+                            @else
+                                <img class="inline w-12 h-12 mr-3 rounded-full" src="{{ asset('assets/images/pp.svg') }}"
+                                    alt="Profile Photo">
+                            @endif
                             Halo, {{ Auth::user()->name }}
                         </button>
                     </div>
@@ -142,7 +147,8 @@
                                                 <img class="object-cover w-full h-full rounded-full"
                                                     src="{{ url('https://randomuser.me/api/portraits/men/4.jpg') }}"
                                                     alt="" loading="lazy" />
-                                                <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true">
+                                                <div class="absolute inset-0 rounded-full shadow-inner"
+                                                    aria-hidden="true">
                                                 </div>
                                             </div>
                                             <div>

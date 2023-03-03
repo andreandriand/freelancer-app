@@ -6,13 +6,18 @@
     @keydown.escape="closeSideMenu" aria-label="aside">
 
     <div class="py-4 text-gray-500 dark:text-gray-400">
-        <a class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200" href="#">
+        <a class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200" href="/">
             <img src="{{ asset('assets/images/logo.svg') }}" alt="" class="ml-6">
         </a>
         <div class="flex items-center pt-5 pl-5 mt-10 space-x-2 border-t border-gray-100">
             <!--Author's profile photo-->
-            <img class="object-cover object-center mr-1 rounded-full w-14 h-14"
-                src="{{ url(Storage::url(auth()->user()->detail_user()->first()->photo)) }}" alt="Profile Photo" />
+            @if (auth()->user()->detail_user()->first()->photo != null)
+                <img class="inline w-12 h-12 mr-3 rounded-full"
+                    src="{{ url(Storage::url(auth()->user()->detail_user()->first()->photo)) }}" alt="Profile Photo">
+            @else
+                <img class="inline w-12 h-12 mr-3 rounded-full" src="{{ asset('assets/images/pp.svg') }}"
+                    alt="Profile Photo">
+            @endif
             <div>
                 <!--Author name-->
                 <p class="font-semibold text-gray-900 text-md">{{ Auth::user()->name }}</p>
