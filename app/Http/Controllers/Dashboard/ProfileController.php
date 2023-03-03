@@ -21,7 +21,6 @@ use App\Http\Requests\Dashboard\Profile\UpdateDetailUserRequest;
 
 class ProfileController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('auth');
@@ -95,21 +94,19 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProfileRequest $request_profile, UpdateDetailUserRequest $request_detail)
+    public function update(UpdateProfileRequest $request_profile, UpdateDetailUserRequest $request_detail, $id)
     {
         $data = $request_profile->all();
         $data_detail = $request_detail->all();
 
         // get user photo
         $getPhoto = DetailUser::where('user_id', Auth::user()->id)->first();
+        $photo = str_replace('assets/photo_profile/', '', $getPhoto['photo']);
 
         // delete old photo
-        if (isset($data_detail['photo'])) {
-            $photo = 'storage/' . $getPhoto['photo'];
-            if (File::exists($photo)) {
-                File::delete($photo);
-            } else {
-                File::delete('storage/app/public/' . $getPhoto['photo']);
+        if ($photo != NULL) {
+            if (Storage::disk('photo_profile')->exists($photo)) {
+                unlink(storage_path('app\public\\' . $getPhoto['photo']));
             }
         }
 
@@ -129,14 +126,17 @@ class ProfileController extends Controller
         // update detail user
         $detail_user = DetailUser::find($user->detail_user->id);
         $detail_user->update($data_detail);
+        $detail_user['contact_number'] = $data_detail['contact_number'];
+        $detail_user->save();
+
 
         // update experience user
-        $experience = ExperienceUser::where('user_detail_id', $detail_user['id'])->first();
+        $experience = ExperienceUser::where('user_detail_id', $detail_user->id)->first();
         if (isset($experience)) {
 
             foreach ($data['experience'] as $key => $value) {
                 $experience_user = ExperienceUser::find($key);
-                $experience_user->user_detail_id = $detail_user['id'];
+                $experience_user->user_detail_id = $detail_user->id;
                 $experience_user->experience = $value;
                 $experience_user->save();
             }
@@ -144,7 +144,7 @@ class ProfileController extends Controller
 
             foreach ($data['experience'] as $key => $value) {
                 $experience_user = new ExperienceUser();
-                $experience_user->user_detail_id = $detail_user['id'];
+                $experience_user->user_detail_id = $detail_user->id;
                 $experience_user->experience = $value;
                 $experience_user->save();
             }
@@ -177,12 +177,12 @@ class ProfileController extends Controller
         $data->photo = NULL;
         $data->save();
 
-        $data = 'storage/' . $get_user_photo['photo'];
+        $photo = str_replace('assets/photo_profile/', '', $get_user_photo['photo']);
 
-        if (File::exists($data)) {
-            File::delete($data);
-        } else {
-            File::delete('storage/app/public/' . $get_user_photo['photo']);
+        if ($get_user_photo['photo'] != NULL) {
+            if (Storage::disk('photo_profile')->exists($photo)) {
+                unlink(storage_path('app\public\\' . $get_user_photo['photo']));
+            }
         }
 
         toast()->success('Foto berhasil dihapus');

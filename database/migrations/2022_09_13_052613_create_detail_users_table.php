@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('user_id')->nullable()->index('fk_detail_users_to_users');
             $table->longText('photo')->nullable();
             $table->string('role')->nullable();
-            $table->string('contact')->nullable();
+            $table->string('contact_number')->nullable();
             $table->longText('biography')->nullable();
             $table->softDeletes();
             $table->timestamps();

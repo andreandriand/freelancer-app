@@ -21,7 +21,7 @@ class DetailUserTableSeeder extends Seeder
                 'user_id' => 1,
                 'photo' => '',
                 'role' => 'Website Developer',
-                'contact' => '08123456789',
+                'contact_number' => '08123456789',
                 'biography' => '',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
@@ -30,7 +30,7 @@ class DetailUserTableSeeder extends Seeder
                 'user_id' => 2,
                 'photo' => '',
                 'role' => 'Android Developer',
-                'contact' => '087812412741',
+                'contact_number' => '087812412741',
                 'biography' => '',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
