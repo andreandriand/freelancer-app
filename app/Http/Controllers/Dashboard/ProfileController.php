@@ -110,7 +110,6 @@ class ProfileController extends Controller
             }
         }
 
-
         // store photo to storage
         if (isset($data_detail['photo'])) {
             $data_detail['photo'] = $request_detail->file('photo')->store(

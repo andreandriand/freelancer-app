@@ -12,12 +12,12 @@
         <div class="flex items-center pt-5 pl-5 mt-10 space-x-2 border-t border-gray-100">
             <!--Author's profile photo-->
             <img class="object-cover object-center mr-1 rounded-full w-14 h-14"
-                src="{{ url('https://randomuser.me/api/portraits/men/1.jpg') }}" alt="random user" />
+                src="{{ url(Storage::url(auth()->user()->detail_user()->first()->photo)) }}" alt="Profile Photo" />
             <div>
                 <!--Author name-->
                 <p class="font-semibold text-gray-900 text-md">{{ Auth::user()->name }}</p>
                 <p class="text-sm font-light text-serv-text">
-                    Website Developer
+                    {{ Auth::user()->detail_user()->first()->role }}
                 </p>
             </div>
         </div>
@@ -25,9 +25,9 @@
             <li class="relative px-6 py-3">
 
                 @if (request()->is('member/dashboard') ||
-                    request()->is('member/*/dashboard') ||
-                    request()->is('member/dashboard/*') ||
-                    request()->is('member/*/dashboard/*'))
+                        request()->is('member/*/dashboard') ||
+                        request()->is('member/dashboard/*') ||
+                        request()->is('member/*/dashboard/*'))
                     <span class="absolute inset-y-0 left-0 w-1 rounded-tr-lg rounded-br-lg bg-serv-bg"
                         aria-hidden="true"></span>
                     <a class="inline-flex items-center w-full text-sm font-medium text-gray-800 transition-colors duration-150 hover:text-gray-800"
@@ -59,9 +59,9 @@
             <li class="relative px-6 py-3">
 
                 @if (request()->is('member/service') ||
-                    request()->is('member/*/service') ||
-                    request()->is('member/service/*') ||
-                    request()->is('member/*/service/*'))
+                        request()->is('member/*/service') ||
+                        request()->is('member/service/*') ||
+                        request()->is('member/*/service/*'))
                     <span class="absolute inset-y-0 left-0 w-1 rounded-tr-lg rounded-br-lg bg-serv-bg"
                         aria-hidden="true"></span>
                     <a class="inline-flex items-center w-full text-sm font-medium text-gray-800 transition-colors duration-150 hover:text-gray-800"
@@ -122,9 +122,9 @@
             <li class="relative px-6 py-3">
 
                 @if (request()->is('member/request') ||
-                    request()->is('member/*/request') ||
-                    request()->is('member/request/*') ||
-                    request()->is('member/*/request/*'))
+                        request()->is('member/*/request') ||
+                        request()->is('member/request/*') ||
+                        request()->is('member/*/request/*'))
                     <span class="absolute inset-y-0 left-0 w-1 rounded-tr-lg rounded-br-lg bg-serv-bg"
                         aria-hidden="true"></span>
                     <a class="inline-flex items-center w-full text-sm font-medium text-gray-800 transition-colors duration-150 hover:text-gray-800"
@@ -178,9 +178,9 @@
             <li class="relative px-6 py-3">
 
                 @if (request()->is('member/order') ||
-                    request()->is('member/*/order') ||
-                    request()->is('member/order/*') ||
-                    request()->is('member/*/order/*'))
+                        request()->is('member/*/order') ||
+                        request()->is('member/order/*') ||
+                        request()->is('member/*/order/*'))
                     <span class="absolute inset-y-0 left-0 w-1 rounded-tr-lg rounded-br-lg bg-serv-bg"
                         aria-hidden="true"></span>
                     <a class="inline-flex items-center w-full text-sm font-medium text-gray-800 transition-colors duration-150 hover:text-gray-800"
@@ -240,9 +240,9 @@
             <li class="relative px-6 py-3">
 
                 @if (request()->is('member/profile') ||
-                    request()->is('member/*/profile') ||
-                    request()->is('member/profile/*') ||
-                    request()->is('member/*/profile/*'))
+                        request()->is('member/*/profile') ||
+                        request()->is('member/profile/*') ||
+                        request()->is('member/*/profile/*'))
                     <span class="absolute inset-y-0 left-0 w-1 rounded-tr-lg rounded-br-lg bg-serv-bg"
                         aria-hidden="true"></span>
                     <a class="inline-flex items-center w-full text-sm font-medium text-gray-800 transition-colors duration-150 hover:text-gray-800"
