@@ -37,14 +37,16 @@
                                                     <img src="{{ url(Storage::url(auth()->user()->detail_user()->first()->photo)) }}"
                                                         class="rounded-full w-16 h-16">
                                                 @else
-                                                    <span
+                                                    <img class="inline-block w-16 h-16 mr-1 rounded-full"
+                                                        src="{{ asset('assets/images/pp.svg') }}" alt="Profile Photo">
+                                                    {{-- <span
                                                         class="inline-block w-16 h-16 overflow-hidden bg-gray-100 rounded-full">
                                                         <svg class="w-full h-full text-gray-300" fill="currentColor"
                                                             viewBox="0 0 24 24">
                                                             <path
                                                                 d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
                                                         </svg>
-                                                    </span>
+                                                    </span> --}}
                                                 @endif
 
                                                 <label for="choose"
@@ -166,7 +168,8 @@
                                     </a>
 
                                     <button type="submit"
-                                        class="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-green-600 border border-transparent rounded-lg shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                                        class="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-green-600 border border-transparent rounded-lg shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                                        onclick="return confirm('Apakah anda yakin ingin menyimpan perubahan ini ?')">
                                         Simpan Perubahan
                                     </button>
                                 </div>
