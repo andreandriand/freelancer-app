@@ -11,7 +11,7 @@ class AdvantageUser extends Model
     // use HasFactory;
     use SoftDeletes;
 
-    public $table = 'advantage_users';
+    public $table = 'advantage_user';
 
     protected $dates = [
         'created_at',
