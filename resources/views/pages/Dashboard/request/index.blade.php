@@ -4,7 +4,7 @@
 
 @section('content')
 
-    {{-- @if () --}}
+    @if (count($order))
         <main class="h-full overflow-y-auto">
             <div class="container mx-auto">
                 <div class="grid w-full gap-5 px-10 mx-auto md:grid-cols-12">
@@ -45,7 +45,8 @@
                                                     <img class="object-cover w-full h-full rounded-full"
                                                         src="{{ url('https://randomuser.me/api/portraits/men/6.jpg') }}"
                                                         alt="" loading="lazy" />
-                                                    <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true">
+                                                    <div class="absolute inset-0 rounded-full shadow-inner"
+                                                        aria-hidden="true">
                                                     </div>
                                                 </div>
                                                 <div>
@@ -60,7 +61,8 @@
                                                     <img class="object-cover w-full h-full rounded"
                                                         src="{{ url('https://randomuser.me/api/portraits/men/3.jpg') }}"
                                                         alt="" loading="lazy" />
-                                                    <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true">
+                                                    <div class="absolute inset-0 rounded-full shadow-inner"
+                                                        aria-hidden="true">
                                                     </div>
                                                 </div>
                                                 <div>
@@ -91,7 +93,8 @@
                                                     <img class="object-cover w-full h-full rounded-full"
                                                         src="{{ url('https://randomuser.me/api/portraits/men/10.jpg') }}"
                                                         alt="" loading="lazy" />
-                                                    <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true">
+                                                    <div class="absolute inset-0 rounded-full shadow-inner"
+                                                        aria-hidden="true">
                                                     </div>
                                                 </div>
                                                 <div>
@@ -106,7 +109,8 @@
                                                     <img class="object-cover w-full h-full rounded"
                                                         src="{{ url('https://randomuser.me/api/portraits/men/7.jpg') }}"
                                                         alt="" loading="lazy" />
-                                                    <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true">
+                                                    <div class="absolute inset-0 rounded-full shadow-inner"
+                                                        aria-hidden="true">
                                                     </div>
                                                 </div>
                                                 <div>
@@ -138,7 +142,8 @@
                                                     <img class="object-cover w-full h-full rounded-full"
                                                         src="{{ url('https://randomuser.me/api/portraits/men/12.jpg') }}"
                                                         alt="" loading="lazy" />
-                                                    <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true">
+                                                    <div class="absolute inset-0 rounded-full shadow-inner"
+                                                        aria-hidden="true">
                                                     </div>
                                                 </div>
                                                 <div>
@@ -153,7 +158,8 @@
                                                     <img class="object-cover w-full h-full rounded"
                                                         src="{{ url('https://randomuser.me/api/portraits/men/5.jpg') }}"
                                                         alt="" loading="lazy" />
-                                                    <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true">
+                                                    <div class="absolute inset-0 rounded-full shadow-inner"
+                                                        aria-hidden="true">
                                                     </div>
                                                 </div>
                                                 <div>
@@ -184,7 +190,7 @@
                 </div>
             </section>
         </main>
-    {{-- @else
+    @else
         <div class="flex h-screen">
             <div class="m-auto text-center">
                 <img src="{{ asset('/assets/images/empty-illustration.svg') }}" alt="" class="w-48 mx-auto">
@@ -197,14 +203,15 @@
                 </p>
 
                 <div class="relative mt-0 md:mt-6">
-                    <a href="{{ route('explore') }}" class="px-4 py-2 mt-2 text-left text-white rounded-xl bg-serv-button">
+                    <a href="{{ route('explore') }}"
+                        class="px-4 py-2 mt-2 text-left text-white rounded-xl bg-serv-button">
                         Find Services
                     </a>
                 </div>
             </div>
         </div>
-    @endif --}}
+    @endif
 
-    
+
 
 @endsection

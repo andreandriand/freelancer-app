@@ -82,11 +82,13 @@ class ServiceController extends Controller
         }
 
         // save to tagline
-        foreach ($data['tagline'] as $key => $value) {
-            $tagline = new Tagline;
-            $tagline->service_id = $service->id;
-            $tagline->tagline = $value;
-            $tagline->save();
+        if (isset($data['tagline'])) {
+            foreach ($data['tagline'] as $key => $value) {
+                $tagline = new Tagline;
+                $tagline->service_id = $service->id;
+                $tagline->tagline = $value;
+                $tagline->save();
+            }
         }
 
         // save to thumbnail service
@@ -188,10 +190,12 @@ class ServiceController extends Controller
         }
 
         // update tagline
-        foreach ($data['taglines'] as $key => $value) {
-            $tagline = Tagline::find($key);
-            $tagline->tagline = $value;
-            $tagline->save();
+        if (isset($data['taglines'])) {
+            foreach ($data['taglines'] as $key => $value) {
+                $tagline = Tagline::find($key);
+                $tagline->tagline = $value;
+                $tagline->save();
+            }
         }
 
         // add new tagline
