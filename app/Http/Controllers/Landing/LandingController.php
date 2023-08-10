@@ -27,9 +27,9 @@ class LandingController extends Controller
      */
     public function index()
     {
-        $service = Service::orderBy('created_at', 'desc')->get();
+        $services = Service::orderBy('created_at', 'desc')->get();
         return view('pages.landing.index', [
-            'service' => $service
+            'services' => $services
         ]);
     }
 
@@ -102,9 +102,9 @@ class LandingController extends Controller
 
     public function explore()
     {
-        $service = Service::orderBy('created_at', 'desc')->get();
+        $services = Service::orderBy('created_at', 'desc')->get();
         return view('pages.landing.explorer', [
-            'service' => $service
+            'services' => $services
         ]);
     }
 
