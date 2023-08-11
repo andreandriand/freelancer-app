@@ -112,10 +112,10 @@
                                         @if ($service->user->detail_user->photo != null)
                                             <img class="w-20 h-20 rounded-full"
                                                 src="{{ url(Storage::url($service->user->detail_user->photo)) }}"
-                                                alt="user photo" loading="lazy" />
+                                                alt="service photo" loading="lazy" />
                                         @else
                                             <img class="w-20 h-20 rounded-full" src="{{ asset('assets/images/pp.svg') }}"
-                                                alt="Profile Photo">
+                                                alt="service Photo">
                                         @endif
                                     </div>
                                     <div class="flex-grow p-4 -mt-8 leading-8 lg:mt-0">

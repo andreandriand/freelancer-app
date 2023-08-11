@@ -13,7 +13,7 @@
                             My Requests
                         </h2>
                         <p class="text-sm text-gray-400">
-                            3 Total Requests
+                            {{ Auth::user()->order_buyer()->count() }} Total Requests
                         </p>
                     </div>
                     <div class="col-span-4 lg:text-right">
@@ -38,151 +38,75 @@
                                 </thead>
 
                                 <tbody class="bg-white">
-                                    <tr class="text-gray-700 border-b">
-                                        <td class="px-1 py-5 text-sm w-2/8">
-                                            <div class="flex items-center text-sm">
-                                                <div class="relative w-10 h-10 mr-3 rounded-full md:block">
-                                                    <img class="object-cover w-full h-full rounded-full"
-                                                        src="{{ url('https://randomuser.me/api/portraits/men/6.jpg') }}"
-                                                        alt="" loading="lazy" />
-                                                    <div class="absolute inset-0 rounded-full shadow-inner"
-                                                        aria-hidden="true">
+                                    @forelse ($order as $req)
+                                        <tr class="text-gray-700 border-b">
+                                            <td class="px-1 py-5 text-sm w-2/8">
+                                                <div class="flex items-center text-sm">
+                                                    <div class="relative w-10 h-10 mr-3 rounded-full md:block">
+                                                        @if ($req->user_freelancer->detail_user->photo != null)
+                                                            <img class="object-cover w-full h-full rounded-full"
+                                                                src="{{ url(Storage::url($req->user_freelancer->detail_user->photo)) }}"
+                                                                alt="user photo" loading="lazy" />
+                                                        @else
+                                                            <img class="object-cover w-full h-full rounded-full"
+                                                                src="{{ asset('assets/images/pp.svg') }}"
+                                                                alt="Profile Photo">
+                                                        @endif
+                                                        <div class="absolute inset-0 rounded-full shadow-inner"
+                                                            aria-hidden="true">
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <p class="font-medium text-black">{{ $req->user_freelancer->name }}
+                                                        </p>
+                                                        <p class="text-sm text-gray-400">
+                                                            {{ $req->user_freelancer->detail_user->role }}</p>
                                                     </div>
                                                 </div>
-                                                <div>
-                                                    <p class="font-medium text-black">Alexa Sara</p>
-                                                    <p class="text-sm text-gray-400">UI Designer</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="w-2/6 px-1 py-5">
-                                            <div class="flex items-center text-sm">
-                                                <div class="relative w-10 h-10 mr-3 rounded-full md:block">
-                                                    <img class="object-cover w-full h-full rounded"
-                                                        src="{{ url('https://randomuser.me/api/portraits/men/3.jpg') }}"
-                                                        alt="" loading="lazy" />
-                                                    <div class="absolute inset-0 rounded-full shadow-inner"
-                                                        aria-hidden="true">
+                                            </td>
+                                            <td class="w-2/6 px-1 py-5">
+                                                <div class="flex items-center text-sm">
+                                                    <div class="relative w-10 h-10 mr-3 rounded-full md:block">
+                                                        @if (isset($req->service->thumbnail_service[0]->thumbnail) && $req->service->thumbnail_service[0]->thumbnail != null)
+                                                            <img class="object-cover w-full h-full rounded"
+                                                                src="{{ url(Storage::url($req->service->thumbnail_service[0]->thumbnailj)) }}"
+                                                                alt="Service Photo">
+                                                        @else
+                                                            <img class="object-cover w-full h-full rounded"
+                                                                src="{{ asset('assets/images/pp.svg') }}"
+                                                                alt="Service Photo">
+                                                        @endif
+                                                        <div class="absolute inset-0 rounded-full shadow-inner"
+                                                            aria-hidden="true">
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <p class="font-medium text-black">
+                                                            {{ $req->service->title }}
+                                                        </p>
                                                     </div>
                                                 </div>
-                                                <div>
-                                                    <p class="font-medium text-black">
-                                                        Design WordPress <br>E-Commerce Modules
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="px-1 py-5 text-sm">
-                                            Rp120.000
-                                        </td>
-                                        <td class="px-1 py-5 text-sm text-green-500 text-md">
-                                            Approved
-                                        </td>
-                                        <td class="px-1 py-5 text-sm">
-                                            <a href="{{ route('member.request.show', 1) }}"
-                                                class="px-4 py-2 mt-2 text-left text-white rounded-xl bg-serv-email">
-                                                Details
-                                            </a>
-                                        </td>
-                                    </tr>
-
-                                    <tr class="text-gray-700 border-b">
-                                        <td class="px-1 py-5 text-sm w-2/8">
-                                            <div class="flex items-center text-sm">
-                                                <div class="relative w-10 h-10 mr-3 rounded-full md:block">
-                                                    <img class="object-cover w-full h-full rounded-full"
-                                                        src="{{ url('https://randomuser.me/api/portraits/men/10.jpg') }}"
-                                                        alt="" loading="lazy" />
-                                                    <div class="absolute inset-0 rounded-full shadow-inner"
-                                                        aria-hidden="true">
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <p class="font-medium text-black">Trisa Jenny</p>
-                                                    <p class="text-sm text-gray-400">Icon Designer</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="w-2/6 px-1 py-5">
-                                            <div class="flex items-center text-sm">
-                                                <div class="relative w-10 h-10 mr-3 rounded-full md:block">
-                                                    <img class="object-cover w-full h-full rounded"
-                                                        src="{{ url('https://randomuser.me/api/portraits/men/7.jpg') }}"
-                                                        alt="" loading="lazy" />
-                                                    <div class="absolute inset-0 rounded-full shadow-inner"
-                                                        aria-hidden="true">
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <p class="font-medium text-black">
-                                                        Fix Any Issue on Your <br>
-                                                        WordPress Website
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="px-1 py-5 text-sm">
-                                            Rp120.000
-                                        </td>
-                                        <td class="px-1 py-5 text-sm text-green-500 text-md">
-                                            Approved
-                                        </td>
-                                        <td class="px-1 py-5 text-sm">
-                                            <a href="{{ route('member.request.show', 1) }}"
-                                                class="px-4 py-2 mt-2 text-left text-white rounded-xl bg-serv-email">
-                                                Details
-                                            </a>
-                                        </td>
-                                    </tr>
-
-                                    <tr class="text-gray-700">
-                                        <td class="px-1 py-5 text-sm w-2/8">
-                                            <div class="flex items-center text-sm">
-                                                <div class="relative w-10 h-10 mr-3 rounded-full md:block">
-                                                    <img class="object-cover w-full h-full rounded-full"
-                                                        src="{{ url('https://randomuser.me/api/portraits/men/12.jpg') }}"
-                                                        alt="" loading="lazy" />
-                                                    <div class="absolute inset-0 rounded-full shadow-inner"
-                                                        aria-hidden="true">
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <p class="font-medium text-black">Joorudan</p>
-                                                    <p class="text-sm text-gray-400">Full - Stack Developer</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="w-2/6 px-1 py-5">
-                                            <div class="flex items-center text-sm">
-                                                <div class="relative w-10 h-10 mr-3 rounded-full md:block">
-                                                    <img class="object-cover w-full h-full rounded"
-                                                        src="{{ url('https://randomuser.me/api/portraits/men/5.jpg') }}"
-                                                        alt="" loading="lazy" />
-                                                    <div class="absolute inset-0 rounded-full shadow-inner"
-                                                        aria-hidden="true">
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <p class="font-medium text-black">
-                                                        Create a UI Design <br>
-                                                        for Your Application
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="px-1 py-5 text-sm">
-                                            Rp120.000
-                                        </td>
-                                        <td class="px-1 py-5 text-sm text-yellow-500 text-md">
-                                            Pending
-                                        </td>
-                                        <td class="px-1 py-5 text-sm">
-                                            <a href="{{ route('member.request.show', 1) }}"
-                                                class="px-4 py-2 mt-2 text-left text-white rounded-xl bg-serv-email">
-                                                Details
-                                            </a>
-                                        </td>
-                                    </tr>
+                                            </td>
+                                            <td class="px-1 py-5 text-sm">
+                                                Rp {{ number_format($req->service->price, 0, ',', '.') }}
+                                            </td>
+                                            <td
+                                                class="px-1 py-5 text-sm 
+                                                @if ($req->order_status_id == 1) {{ ' text-green-500' }}
+                                                @elseif ($req->order_status_id == 2) {{ 'text-yellow-500' }}
+                                                @elseif ($req->order_status_id == 3) {{ 'text-red-500' }} @endif text-md">
+                                                {{ $req->order_status->name }}
+                                            </td>
+                                            <td class="px-1 py-5 text-sm">
+                                                <a href="{{ route('member.request.show', $req->id) }}"
+                                                    class="px-4 py-2 mt-2 text-left text-white rounded-xl bg-serv-email">
+                                                    Details
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    @empty
+                                        {{-- empty --}}
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>
@@ -203,8 +127,7 @@
                 </p>
 
                 <div class="relative mt-0 md:mt-6">
-                    <a href="{{ route('explore') }}"
-                        class="px-4 py-2 mt-2 text-left text-white rounded-xl bg-serv-button">
+                    <a href="{{ route('explore') }}" class="px-4 py-2 mt-2 text-left text-white rounded-xl bg-serv-button">
                         Find Services
                     </a>
                 </div>
