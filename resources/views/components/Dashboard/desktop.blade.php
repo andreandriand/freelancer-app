@@ -88,7 +88,7 @@
                     </svg> -->
                         <span class="ml-4">My Services</span>
                         <span
-                            class="inline-flex items-center justify-center px-3 py-2 ml-auto text-xs font-bold leading-none text-green-500 rounded-full bg-serv-green-badge">2</span>
+                            class="inline-flex items-center justify-center px-3 py-2 ml-auto text-xs font-bold leading-none text-green-500 rounded-full bg-serv-green-badge">{{ Auth::user()->service->count() }}</span>
 
                     </a>
                 @else
@@ -114,7 +114,7 @@
                     </svg> -->
                         <span class="ml-4">My Services</span>
                         <span
-                            class="inline-flex items-center justify-center px-3 py-2 ml-auto text-xs font-bold leading-none text-green-500 rounded-full bg-serv-green-badge">2</span>
+                            class="inline-flex items-center justify-center px-3 py-2 ml-auto text-xs font-bold leading-none text-green-500 rounded-full bg-serv-green-badge">{{ Auth::user()->service->count() }}</span>
 
                     </a>
                 @endif
@@ -148,7 +148,7 @@
                     </svg> -->
                         <span class="ml-4">My Request</span>
                         <span
-                            class="inline-flex items-center justify-center px-3 py-2 ml-auto text-xs font-bold leading-none text-green-500 rounded-full bg-serv-green-badge">3</span>
+                            class="inline-flex items-center justify-center px-3 py-2 ml-auto text-xs font-bold leading-none text-green-500 rounded-full bg-serv-green-badge">{{ Auth::user()->order_buyer()->count() }}</span>
 
                     </a>
                 @else
@@ -171,7 +171,7 @@
                     </svg> -->
                         <span class="ml-4">My Request</span>
                         <span
-                            class="inline-flex items-center justify-center px-3 py-2 ml-auto text-xs font-bold leading-none text-green-500 rounded-full bg-serv-green-badge">3</span>
+                            class="inline-flex items-center justify-center px-3 py-2 ml-auto text-xs font-bold leading-none text-green-500 rounded-full bg-serv-green-badge">{{ Auth::user()->order_buyer()->count() }}</span>
 
                     </a>
                 @endif
@@ -208,7 +208,7 @@
                     </svg> -->
                         <span class="ml-4">My Orders</span>
                         <span
-                            class="inline-flex items-center justify-center px-3 py-2 ml-auto text-xs font-bold leading-none text-green-500 rounded-full bg-serv-green-badge">10</span>
+                            class="inline-flex items-center justify-center px-3 py-2 ml-auto text-xs font-bold leading-none text-green-500 rounded-full bg-serv-green-badge">{{ Auth::user()->order_freelancer()->count() }}</span>
 
                     </a>
                 @else
@@ -234,7 +234,7 @@
                     </svg> -->
                         <span class="ml-4">My Orders</span>
                         <span
-                            class="inline-flex items-center justify-center px-3 py-2 ml-auto text-xs font-bold leading-none text-green-500 rounded-full bg-serv-green-badge">10</span>
+                            class="inline-flex items-center justify-center px-3 py-2 ml-auto text-xs font-bold leading-none text-green-500 rounded-full bg-serv-green-badge">{{ Auth::user()->order_freelancer()->count() }}</span>
 
                     </a>
                 @endif

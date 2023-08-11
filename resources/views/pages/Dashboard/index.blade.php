@@ -43,7 +43,7 @@
                                     <img src="{{ asset('/assets/images/services-progress-icon.svg') }}" alt=""
                                         class="w-8 h-8">
                                 </div>
-                                <p class="mt-2 text-2xl font-semibold text-left text-gray-800">{{ $order->count() }}</p>
+                                <p class="mt-2 text-2xl font-semibold text-left text-gray-800">{{ $progress }}</p>
                                 <p class="text-sm text-left text-gray-500">
                                     Services <br class="hidden lg:block">
                                     On Progress

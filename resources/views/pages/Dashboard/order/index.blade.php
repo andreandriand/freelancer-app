@@ -36,63 +36,115 @@
                             </thead>
 
                             <tbody class="bg-white">
-                                <tr class="text-gray-700 border-b">
-                                    <td class="px-1 py-5 text-sm w-2/8">
-                                        <div class="flex items-center text-sm">
-                                            <div class="relative w-10 h-10 mr-3 rounded-full md:block">
-                                                <img class="object-cover w-full h-full rounded-full"
-                                                    src="{{ url('https://randomuser.me/api/portraits/men/6.jpg') }}"
-                                                    alt="" loading="lazy" />
-                                                <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true">
+                                @forelse ($order as $item)
+                                    <tr class="text-gray-700 border-b">
+                                        <td class="px-1 py-5 text-sm w-2/8">
+                                            <div class="flex items-center text-sm">
+                                                <div class="relative w-10 h-10 mr-3 rounded-full md:block">
+                                                    @if ($item->user_buyer->detail_user->photo != null)
+                                                        <img class="object-cover w-full h-full rounded-full"
+                                                            src="{{ url(Storage::url($item->user_buyer->detail_user->photo)) }}"
+                                                            alt="user photo" loading="lazy" />
+                                                    @else
+                                                        <img class="object-cover w-full h-full rounded-full"
+                                                            src="{{ asset('assets/images/pp.svg') }}" alt="Profile Photo"
+                                                            loading="lazy">
+                                                    @endif
+                                                    <div class="absolute inset-0 rounded-full shadow-inner"
+                                                        aria-hidden="true">
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <p class="font-medium text-black">{{ $item->user_buyer->name }}
+                                                    </p>
+                                                    <p class="text-sm text-gray-400">
+                                                        {{ $item->user_buyer->detail_user->contact_number }}
+                                                    </p>
                                                 </div>
                                             </div>
-                                            <div>
-                                                <p class="font-medium text-black">Alexa Sara</p>
-                                                <p class="text-sm text-gray-400">UI Designer</p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="w-2/6 px-1 py-5">
-                                        <div class="flex items-center text-sm">
-                                            <div class="relative w-10 h-10 mr-3 rounded-full md:block">
-                                                <img class="object-cover w-full h-full rounded"
-                                                    src="{{ url('https://randomuser.me/api/portraits/men/3.jpg') }}"
-                                                    alt="" loading="lazy" />
-                                                <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true">
+                                        </td>
+                                        <td class="w-2/6 px-1 py-5">
+                                            <div class="flex items-center text-sm">
+                                                <div class="relative w-10 h-10 mr-3 rounded-full md:block">
+                                                    @if (isset($item->service->thumbnail_service[0]->thumbnail) && $item->service->thumbnail_service[0]->thumbnail != null)
+                                                        <img class="object-cover w-full h-full rounded"
+                                                            src="{{ url(Storage::url($item->service->thumbnail_service[0]->thumbnail)) }}"
+                                                            alt="user photo" loading="lazy" />
+                                                    @else
+                                                        <img class="object-cover w-full h-full rounded"
+                                                            src="{{ asset('assets/images/pp.svg') }}" alt="Profile Photo"
+                                                            loading="lazy">
+                                                    @endif
+                                                    <div class="absolute inset-0 rounded-full shadow-inner"
+                                                        aria-hidden="true">
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <p class="font-medium text-black">
+                                                        {{ $item->service->title }}
+                                                    </p>
                                                 </div>
                                             </div>
-                                            <div>
-                                                <p class="font-medium text-black">
-                                                    Design WordPress <br>E-Commerce Modules
+                                        </td>
+
+                                        <td class="px-1 py-5 text-xs text-red-500">
+                                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg" class="inline mb-1">
+                                                <path
+                                                    d="M7.0002 12.8332C10.2219 12.8332 12.8335 10.2215 12.8335 6.99984C12.8335 3.77818 10.2219 1.1665 7.0002 1.1665C3.77854 1.1665 1.16687 3.77818 1.16687 6.99984C1.16687 10.2215 3.77854 12.8332 7.0002 12.8332Z"
+                                                    stroke="#F26E6E" stroke-linecap="round" stroke-linejoin="round" />
+                                                <path d="M7 3.5V7L9.33333 8.16667" stroke="#F26E6E" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                            </svg>
+
+                                            {{ (strtotime($item->expired) - strtotime(date('Y-m-d'))) / 86400 ?? '' }} days
+                                            left
+                                        </td>
+                                        <td class="px-1 py-5 text-sm">
+                                            @if ($item->order_status_id == '1')
+                                                <a href="{{ route('member.order.show', $item->id) }}"
+                                                    class="px-4 py-2 mt-1 mr-2 text-center text-white rounded-xl bg-serv-email">
+                                                    Details
+                                                </a>
+                                                <p class="px-4 py-2 mt-2 inline text-left text-green-500">
+                                                    Approved
                                                 </p>
-                                            </div>
-                                        </div>
-                                    </td>
+                                            @elseif ($item->order_status_id == '2')
+                                                <a href="{{ route('member.order.show', $item->id) }}"
+                                                    class="px-4 py-2 mt-1 mr-2 text-center text-white rounded-xl bg-serv-email">
+                                                    Details
+                                                </a>
+                                                <p class="px-4 py-2 mt-2 inline text-left text-red-500">
+                                                    Rejected
+                                                </p>
+                                            @elseif ($item->order_status_id == '3')
+                                                <a href="{{ route('member.order.show', $item->id) }}"
+                                                    class="px-4 py-2 mt-1 mr-2 text-center text-white rounded-xl bg-serv-email">
+                                                    Details
+                                                </a>
+                                                <a href="{{ route('member.order.edit', $item->id) }}"
+                                                    class="px-4 py-2 mt-1 mr-2 text-center text-white rounded-xl bg-serv-email">
+                                                    Submit
+                                                </a>
+                                            @elseif ($item->order_status_id == '4')
+                                                <a href="{{ route('member.accept.order', $item->id) }}"
+                                                    class="px-4 py-2 mt-1 mr-2 text-center text-white rounded-xl bg-serv-email">
+                                                    Accept
+                                                </a>
+                                                <a href="{{ route('member.reject.order', $item->id) }}"
+                                                    class="px-4 py-2 mt-1 mr-2 text-center text-white rounded-xl bg-serv-email">
+                                                    Reject
+                                                </a>
+                                            @else
+                                            @endif
+                                        </td>
+                                    </tr>
 
-                                    <td class="px-1 py-5 text-xs text-red-500">
-                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg" class="inline mb-1">
-                                            <path
-                                                d="M7.0002 12.8332C10.2219 12.8332 12.8335 10.2215 12.8335 6.99984C12.8335 3.77818 10.2219 1.1665 7.0002 1.1665C3.77854 1.1665 1.16687 3.77818 1.16687 6.99984C1.16687 10.2215 3.77854 12.8332 7.0002 12.8332Z"
-                                                stroke="#F26E6E" stroke-linecap="round" stroke-linejoin="round" />
-                                            <path d="M7 3.5V7L9.33333 8.16667" stroke="#F26E6E" stroke-linecap="round"
-                                                stroke-linejoin="round" />
-                                        </svg>
+                                @empty
+                                    {{-- empty --}}
+                                @endforelse
 
-                                        3 days left
-                                    </td>
-                                    <td class="px-1 py-5 text-sm">
-                                        <a href="{{ route('member.order.show', 1) }}"
-                                            class="px-4 py-2 mt-1 mr-2 text-center text-white rounded-xl bg-serv-email">
-                                            Details</a>
-                                        <a href="{{ route('member.order.edit', 1) }}"
-                                            class="px-4 py-2 mt-2 text-center text-white rounded-xl bg-serv-email">
-                                            Submit
-                                        </a>
-                                    </td>
-                                </tr>
-
-                                <tr class="text-gray-700 border-b">
+                                {{-- <tr class="text-gray-700 border-b">
                                     <td class="px-1 py-5 text-sm w-2/8">
                                         <div class="flex items-center text-sm">
                                             <div class="relative w-10 h-10 mr-3 rounded-full md:block">
@@ -204,7 +256,7 @@
                                             Reject
                                         </a>
                                     </td>
-                                </tr>
+                                </tr> --}}
                             </tbody>
                         </table>
                     </div>

@@ -119,11 +119,25 @@ class RequestController extends Controller
 
         // update status order
         $order = Order::find($order->id);
-        $order->status_id = 1;
+        $order->order_status_id = 1;
         $order->save();
 
         toast()->success('Order berhasil di approve');
 
         return redirect()->route('member.request.index');
     }
+
+    // public function reject($id)
+    // {
+    //     $order = Order::where('id', $id)->first();
+
+    //     // update status order
+    //     $order = Order::find($order->id);
+    //     $order->status_id = 2;
+    //     $order->save();
+
+    //     toast()->success('Order berhasil di approve');
+
+    //     return redirect()->route('member.request.index');
+    // }
 }

@@ -46,7 +46,8 @@
                                                         alt="user photo" loading="lazy" />
                                                 @else
                                                     <img class="object-cover w-full h-full rounded-full"
-                                                        src="{{ asset('assets/images/pp.svg') }}" alt="Profile Photo">
+                                                        src="{{ asset('assets/images/pp.svg') }}" alt="Profile Photo"
+                                                        loading="lazy">
                                                 @endif
                                                 <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true">
                                                 </div>
@@ -64,10 +65,11 @@
                                                 @if (isset($order->service->thumbnail_service[0]->thumbnail) && $order->service->thumbnail_service[0]->thumbnail != null)
                                                     <img class="object-cover w-full h-full rounded"
                                                         src="{{ url(Storage::url($order->service->thumbnail_service[0]->thumbnailj)) }}"
-                                                        alt="Service Photo">
+                                                        alt="Service Photo" loading="lazy">
                                                 @else
                                                     <img class="object-cover w-full h-full rounded"
-                                                        src="{{ asset('assets/images/pp.svg') }}" alt="Service Photo">
+                                                        src="{{ asset('assets/images/pp.svg') }}" alt="Service Photo"
+                                                        loading="lazy">
                                                 @endif
                                                 <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true">
                                                 </div>
@@ -145,7 +147,7 @@
                                         onclick="return confirm('Apakah anda yakin ingin kembali? Perubahan tidak akan disimpan')">
                                         Kembali
                                     </a>
-                                    @if ($order->order_status_id == 2 && isset($order->file))
+                                    @if ($order->order_status_id == 3 && isset($order->file))
                                         <a href="{{ route('member.approve.request', $order->id) }}" type="submit"
                                             class="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-green-600 border border-transparent rounded-lg shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
                                             onclick="return confirm('Apakah anda yakin ingin menyetujui pesanan ini ?')">

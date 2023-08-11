@@ -44,7 +44,7 @@
                                 <img :class="{ 'border-4 border-serv-button': active === {{ $thumb->id }} }"
                                     @click="changeThumbnail('{{ url(Storage::url($thumb->thumbnail)) }}', {{ $thumb->id }})"
                                     src="{{ url(Storage::url($thumb->thumbnail)) }}" alt="thumbnail-service"
-                                    class="inline-block mr-2 rounded-lg cursor-pointer w-36 h-20 object-cover">
+                                    class="inline-block w-24 mr-2 rounded-lg cursor-pointer">
                             @empty
                                 {{-- empty --}}
                             @endforelse

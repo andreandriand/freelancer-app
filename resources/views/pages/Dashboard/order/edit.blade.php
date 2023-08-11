@@ -40,15 +40,22 @@
                                     <td class="px-1 py-5 text-sm w-2/8">
                                         <div class="flex items-center text-sm">
                                             <div class="relative w-10 h-10 mr-3 rounded-full md:block">
-                                                <img class="object-cover w-full h-full rounded-full"
-                                                    src="{{ url('https://randomuser.me/api/portraits/men/6.jpg') }}"
-                                                    alt="" loading="lazy" />
+                                                @if ($order->user_freelancer->detail_user->photo != null)
+                                                    <img class="object-cover w-full h-full rounded-full"
+                                                        src="{{ url(Storage::url($order->user_freelancer->detail_user->photo)) }}"
+                                                        alt="user photo" loading="lazy" />
+                                                @else
+                                                    <img class="object-cover w-full h-full rounded-full"
+                                                        src="{{ asset('assets/images/pp.svg') }}" alt="Profile Photo"
+                                                        loading="lazy">
+                                                @endif
                                                 <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true">
                                                 </div>
                                             </div>
                                             <div>
-                                                <p class="font-medium text-black">Alexa Sara</p>
-                                                <p class="text-sm text-gray-400">087785091245</p>
+                                                <p class="font-medium text-black">{{ $order->user_freelancer->name }}</p>
+                                                <p class="text-sm text-gray-400">
+                                                    {{ $order->user_freelancer->detail_user->contact_number }}</p>
                                             </div>
                                         </div>
                                     </td>
@@ -56,22 +63,28 @@
                                     <td class="w-2/6 px-1 py-5">
                                         <div class="flex items-center text-sm">
                                             <div class="relative w-10 h-10 mr-3 rounded-full md:block">
-                                                <img class="object-cover w-full h-full rounded"
-                                                    src="{{ url('https://randomuser.me/api/portraits/men/3.jpg') }}"
-                                                    alt="" loading="lazy" />
+                                                @if (isset($order->service->thumbnail_service[0]->thumbnail) && $order->service->thumbnail_service[0]->thumbnail != null)
+                                                    <img class="object-cover w-full h-full rounded"
+                                                        src="{{ url(Storage::url($order->service->thumbnail_service[0]->thumbnailj)) }}"
+                                                        alt="Service Photo" loading="lazy">
+                                                @else
+                                                    <img class="object-cover w-full h-full rounded"
+                                                        src="{{ asset('assets/images/pp.svg') }}" alt="Service Photo"
+                                                        loading="lazy">
+                                                @endif
                                                 <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true">
                                                 </div>
                                             </div>
                                             <div>
                                                 <p class="font-medium text-black">
-                                                    Design WordPress <br>E-Commerce Modules
+                                                    {{ $order->service->title }}
                                                 </p>
                                             </div>
                                         </div>
                                     </td>
 
                                     <td class="px-1 py-5 text-sm">
-                                        Rp120.000
+                                        Rp {{ number_format($order->service->price, 0, ',', '.') }}
                                     </td>
 
                                     <td class="px-1 py-5 text-xs text-red-500">
@@ -84,54 +97,84 @@
                                                 stroke-linejoin="round" />
                                         </svg>
 
-                                        3 days left
+                                        {{ (strtotime($order->expired) - strtotime(date('Y-m-d'))) / 86400 ?? '' }} days
+                                        left
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
 
-                        <div class="flex p-8 border border-gray-200 rounded-lg bg-serv-upload-bg h-128">
-                            <div class="m-auto text-center">
-                                <img src="{{ asset('/assets/images/services-file-icon.svg') }}" alt=""
-                                    class="w-20 mx-auto">
-                                <h2 class="mt-8 mb-1 text-2xl font-semibold text-gray-700">
-                                    ProjectWordpress.zip
-                                </h2>
-                                <p class="text-sm text-gray-400">
-                                    Drag and drop an file, or Browse
-                                </p>
+                        <form action="{{ route('member.order.update', $order->id) }}" method="POST"
+                            enctype="multipart/form-data">
 
-                                <div class="relative mt-0 md:mt-6">
-                                    <button class="px-4 py-2 mt-2 text-left text-gray-700 rounded-xl bg-serv-hr">
-                                        Choose File
-                                    </button>
+                            @method('PUT')
+                            @csrf
+
+                            <div class="flex p-8 border border-gray-200 rounded-lg bg-serv-upload-bg h-128">
+                                <div class="m-auto text-center">
+                                    <img src="{{ asset('/assets/images/services-file-icon.svg') }}" alt=""
+                                        class="w-20 mx-auto">
+                                    <h2 class="mt-8 mb-1 text-2xl font-semibold text-gray-700">
+                                        @if (isset($order->file))
+                                            {{ substr($order->file, -10) ?? '' }}
+                                        @else
+                                            File Belum Diunggah
+                                        @endif
+                                    </h2>
+                                    <p class="text-sm text-gray-400">
+                                        Drag and drop an file, or Browse
+                                    </p>
+
+                                    <div class="relative mt-0 md:mt-6">
+                                        @if (isset($order->file))
+                                            <a href="{{ url(Storage::url($order->file ?? '')) }}" type="button"
+                                                class="px-4 py-2 mt-2 text-left text-gray-700 rounded-xl bg-serv-hr"
+                                                onclick="return confirm('Apakah anda yakin ingin mengunduh file ini ?')">
+                                                Download File
+                                            </a>
+                                        @else
+                                            <label for="berkas"
+                                                class="px-4 py-2 mt-2 text-left text-gray-700 rounded-xl bg-serv-hr">Pilih
+                                                File</label>
+                                            <input type="file" accept=".zip" id="berkas" name="file" hidden
+                                                required>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <form action="#" method="POST">
                             <div class="">
                                 <div class="p-1 mt-5">
                                     <div class="grid grid-cols-6 gap-6">
                                         <div class="col-span-6">
                                             <label for="service-name"
                                                 class="block mb-3 font-medium text-gray-700 text-md">Note</label>
-                                            <textarea placeholder="Enter your biography here.." type="text" name="service-name" id="service-name"
+                                            <textarea placeholder="Masukkan Note (Jika ada)" type="text" name="note" id="note"
                                                 autocomplete="service-name"
                                                 class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
-                                                rows="4">“Hai, aku baru saja mengirim zip file service yang kamu butuhkan. di dalamnya terdapat soft file dan panduan cara menggunakan service ini. terima kasih sudah order. jika butuh sesuatu bisa contact saya di whatsapp”</textarea>
+                                                rows="4">{{ old('note', $order->note) }}</textarea>
+
+                                            @if ($errors->has('note'))
+                                                <span class="text-sm text-red-500 mb-3">
+                                                    {{ $errors->first('note') }}
+                                                </span>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
                                 <div class="px-1 py-4 text-right">
-                                    <a href="{{ route('member.order.index') }}"
-                                        class="inline-flex justify-center px-4 py-2 mr-4 text-sm font-medium text-gray-700 bg-white border border-gray-600 rounded-lg shadow-sm hover:bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300">
-                                        Back
+                                    <a href="{{ route('member.order.index') }}" type="button"
+                                        class="inline-flex justify-center px-4 py-2 mr-4 text-sm font-medium text-gray-700 bg-white border border-gray-600 rounded-lg shadow-sm hover:bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300"
+                                        onclick="return confirm('Apakah anda yakin ingin kembali ? Semua perubahan tidak akan disimpan')">
+                                        Kembali
                                     </a>
-                                    <button type="submit"
-                                        class="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-green-600 border border-transparent rounded-lg shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
-                                        Approve
-                                    </button>
+
+                                    @if (!isset($order->file))
+                                        <button type="submit"
+                                            class="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-green-600 border border-transparent rounded-lg shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                                            Kirim
+                                        </button>
+                                    @endif
                                 </div>
                             </div>
                         </form>

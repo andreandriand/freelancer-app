@@ -145,7 +145,7 @@ class MyOrderController extends Controller
     public function accepted($id)
     {
         $order = Order::find($id);
-        $order->order_status_id = 1;
+        $order->order_status_id = 3;
         $order->save();
 
         toast()->success('Order Berhasil Diterima');
